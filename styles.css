@@ -1,0 +1,137 @@
+:root {
+    --bg: #e9f3ec;
+    --card: #ffffff;
+    --text: #1e2b20;
+    --muted: #60735f;
+    --accent: #6ebd7a;
+    --accent-hover: #5ca967;
+    --border: #c9d8c9;
+    --dash: #9fbe9f;
+}
+
+* { box-sizing: border-box; }
+
+html, body { height: 100%; }
+
+body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font: 16px/1.6 system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+.container {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 0 16px;
+}
+
+/* Header */
+header h1 {
+    margin: 0 0 8px;
+    font-size: clamp(28px, 4vw, 36px);
+    font-weight: 700;
+    color: var(--text);
+}
+.byline {
+    color: var(--muted);
+    margin: 0 0 24px;
+}
+
+/* Sections */
+section {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 16px;
+    margin: 14px 0;
+    box-shadow: 0 4px 12px rgba(110, 189, 122, 0.15);
+}
+h2 {
+    margin: 0 0 10px;
+    font-size: 20px;
+    color: var(--text);
+}
+ul { margin: 8px 0 0 18px; }
+
+/* Mockup box */
+.mockup {
+    background: #f6faf7; /* soft light green */
+    border: 2px dashed var(--dash);
+    border-radius: 10px;
+    padding: 16px;
+    color: var(--text);
+    overflow: auto;
+}
+.mockup h3 {
+    margin: 0 0 8px;
+    color: var(--text);
+    font-size: 18px;
+}
+
+/* Buttons */
+button[type="button"] {
+    border: 1px solid var(--accent);
+    background: var(--accent);
+    color: #fff;
+    padding: 8px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background 0.2s ease, transform 0.1s ease;
+}
+button[type="button"]:hover {
+    background: var(--accent-hover);
+    transform: translateY(-1px);
+}
+
+/* Tables */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 12px;
+    background: #f9fcfa;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+}
+thead th {
+    background: #e3f2e6; /* very light green header */
+    color: var(--text);
+    font-weight: 600;
+    text-align: left;
+}
+th, td {
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--border);
+}
+tbody tr:hover {
+    background: #edf7ef;
+}
+tfoot td {
+    font-weight: 600;
+    color: var(--text);
+    background: #e3f2e6;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    color: var(--muted);
+    margin: 16px 0;
+}
+
+/* Links */
+a {
+    color: var(--accent);
+    text-decoration: none;
+}
+a:hover {
+    color: var(--accent-hover);
+}
+
+/* Responsive design */
+@media (max-width: 560px) {
+    .container { margin: 24px auto; }
+    th:nth-child(4), td:nth-child(4) { display: none; } /* hide Notes on small screens */
+}
