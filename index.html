@@ -3,41 +3,77 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Fitness Tracker Project</title>
+  <title>Fitness Tracker – Yadsari Guerrero</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
 <main class="container">
   <header>
     <h1>Fitness Tracker</h1>
+    <p class="byline">Log workouts, track weekly progress, and build healthy habits.</p>
   </header>
 
   <section>
     <h2>Project Description</h2>
     <p>
-      This Fitness Tracker allows users to log their workouts by type, date, and duration
-      and view weekly summaries to monitor and build healthy habits over time.
+      This Fitness Tracker allows users to log their workouts by type, date, and duration,
+      view them in a table, and see weekly summaries to monitor and build healthy habits over time.
+      All data is stored locally in the browser so it persists between visits on the same device.
     </p>
   </section>
 
   <section>
     <h2>Features</h2>
     <ul>
-      <li>Users can add, edit, and delete workouts</li>
-      <li>View workouts in a table (date, type, duration)</li>
-      <li>Display summaries of weekly progress</li>
-      <li>Earn achievement badges </li>
-      <li>Track calories burned and plan meals</li>
-      <li>Add user login and personalized dashboard</li>
+      <li>Add, edit, and delete workouts</li>
+      <li>View workouts in a table (date, type, duration, notes)</li>
+      <li>Weekly total minutes and workout count</li>
+      <li>Progress bar towards a 150-minute weekly goal</li>
+      <li>Simple achievement badges based on weekly activity</li>
+      <li>Data saved in the browser using localStorage (no login required)</li>
     </ul>
   </section>
 
   <section>
-    <h2>Layout / Sketch</h2>
+    <h2>Fitness Tracker Dashboard</h2>
     <div class="mockup">
-      <h3>Fitness Tracker</h3>
-      <button type="button">Add workout</button>
+      <h3>My Workouts</h3>
 
+      <!-- Add / Edit Workout Form -->
+      <form id="workout-form" class="mockup-form">
+        <label>
+          Date
+          <input type="date" id="date" required />
+        </label>
+        <label>
+          Type
+          <select id="type" required>
+            <option value="">Select type</option>
+            <option>Run</option>
+            <option>Walk</option>
+            <option>Yoga</option>
+            <option>Strength</option>
+            <option>Cycling</option>
+            <option>Other</option>
+          </select>
+        </label>
+        <label>
+          Duration (minutes)
+          <input type="number" id="duration" min="1" required />
+        </label>
+        <label>
+          Notes
+          <input type="text" id="notes" placeholder="Optional" />
+        </label>
+        <div class="form-actions">
+          <button type="submit" id="save-button">Add workout</button>
+          <button type="button" id="cancel-edit" class="secondary-button" style="display:none;">
+            Cancel edit
+          </button>
+        </div>
+      </form>
+
+      <!-- Workouts Table -->
       <table>
         <thead>
         <tr>
@@ -45,15 +81,38 @@
           <th scope="col">Type</th>
           <th scope="col">Duration</th>
           <th scope="col">Notes</th>
+          <th scope="col">Actions</th>
         </tr>
         </thead>
-        <tbody>
-        <tr><td>Oct 10</td><td>Run</td><td>30 min</td><td>Treadmill</td></tr>
+        <tbody id="workout-body">
+        <!-- Filled by script.js -->
         </tbody>
         <tfoot>
-        <tr><td colspan="4">Weekly Total: 120 min</td></tr>
+        <tr>
+          <td colspan="5" id="weekly-total">Weekly Total: 0 min (0 workouts)</td>
+        </tr>
         </tfoot>
       </table>
+
+      <button type="button" id="clear-all" class="secondary-button" style="margin-top:8px;">
+        Clear all workouts
+      </button>
+
+      <!-- Weekly summary + badges -->
+      <div class="weekly-summary">
+        <p><strong>This week:</strong> <span id="summary-text">0 workouts • 0 minutes</span></p>
+        <div class="progress-bar">
+          <div class="progress-fill" id="progress-fill"></div>
+        </div>
+        <p class="goal-text">Goal: 150 minutes per week</p>
+
+        <div class="badges">
+          <h4>Badges</h4>
+          <ul id="badges-list">
+            <!-- Filled by script.js -->
+          </ul>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -61,5 +120,7 @@
     <p>&copy; 2025 Yadsari Guerrero</p>
   </footer>
 </main>
+
+<script src="script.js"></script>
 </body>
 </html>
