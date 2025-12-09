@@ -3,123 +3,234 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Fitness Tracker – Yadsari Guerrero</title>
+  <title>DailyFit Fitness Tracker by Yadsari</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-<main class="container">
-  <header>
-    <h1>Fitness Tracker</h1>
-    <p class="byline">Log workouts, track weekly progress, and build healthy habits.</p>
+<div class="app">
+  <!-- Top navigation bar -->
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-dot"></span>
+      <span class="brand-name">DailyFit</span>
+    </div>
+    <nav class="nav">
+      <button class="nav-link active" data-view="dashboard">Dashboard</button>
+      <button class="nav-link" data-view="history">History</button>
+      <button class="nav-link" data-view="stats">Stats</button>
+      <button class="nav-link" data-view="settings">Settings</button>
+    </nav>
   </header>
 
-  <section>
-    <h2>Project Description</h2>
-    <p>
-      This Fitness Tracker allows users to log their workouts by type, date, and duration,
-      view them in a table, and see weekly summaries to monitor and build healthy habits over time.
-      All data is stored locally in the browser so it persists between visits on the same device.
-    </p>
-  </section>
+  <!-- Main content area -->
+  <main class="shell">
 
-  <section>
-    <h2>Features</h2>
-    <ul>
-      <li>Add, edit, and delete workouts</li>
-      <li>View workouts in a table (date, type, duration, notes)</li>
-      <li>Weekly total minutes and workout count</li>
-      <li>Progress bar towards a 150-minute weekly goal</li>
-      <li>Simple achievement badges based on weekly activity</li>
-      <li>Data saved in the browser using localStorage (no login required)</li>
-    </ul>
-  </section>
-
-  <section>
-    <h2>Fitness Tracker Dashboard</h2>
-    <div class="mockup">
-      <h3>My Workouts</h3>
-
-      <!-- Add / Edit Workout Form -->
-      <form id="workout-form" class="mockup-form">
-        <label>
-          Date
-          <input type="date" id="date" required />
-        </label>
-        <label>
-          Type
-          <select id="type" required>
-            <option value="">Select type</option>
-            <option>Run</option>
-            <option>Walk</option>
-            <option>Yoga</option>
-            <option>Strength</option>
-            <option>Cycling</option>
-            <option>Other</option>
-          </select>
-        </label>
-        <label>
-          Duration (minutes)
-          <input type="number" id="duration" min="1" required />
-        </label>
-        <label>
-          Notes
-          <input type="text" id="notes" placeholder="Optional" />
-        </label>
-        <div class="form-actions">
-          <button type="submit" id="save-button">Add workout</button>
-          <button type="button" id="cancel-edit" class="secondary-button" style="display:none;">
-            Cancel edit
-          </button>
+    <!-- Dashboard View -->
+    <section id="view-dashboard" class="view active">
+      <section class="card hero-card">
+        <div class="hero-left">
+          <h1>Welcome!</h1>
+          <p class="hero-text">
+            Log your workouts, hit your weekly goal, and watch your stats grow over time.
+            Earn badges as you reach new goals!
+          </p>
         </div>
-      </form>
-
-      <!-- Workouts Table -->
-      <table>
-        <thead>
-        <tr>
-          <th scope="col">Date</th>
-          <th scope="col">Type</th>
-          <th scope="col">Duration</th>
-          <th scope="col">Notes</th>
-          <th scope="col">Actions</th>
-        </tr>
-        </thead>
-        <tbody id="workout-body">
-        <!-- Filled by script.js -->
-        </tbody>
-        <tfoot>
-        <tr>
-          <td colspan="5" id="weekly-total">Weekly Total: 0 min (0 workouts)</td>
-        </tr>
-        </tfoot>
-      </table>
-
-      <button type="button" id="clear-all" class="secondary-button" style="margin-top:8px;">
-        Clear all workouts
-      </button>
-
-      <!-- Weekly summary + badges -->
-      <div class="weekly-summary">
-        <p><strong>This week:</strong> <span id="summary-text">0 workouts • 0 minutes</span></p>
-        <div class="progress-bar">
-          <div class="progress-fill" id="progress-fill"></div>
+        <div class="hero-right">
+          <div class="stat-pill hero-pill">
+            <span class="stat-label">This week</span>
+            <span class="stat-value" id="hero-week-summary">0 min</span>
+          </div>
+          <div class="stat-pill hero-pill">
+            <span class="stat-label">All-time workouts</span>
+            <span class="stat-value" id="hero-workouts-count">0</span>
+          </div>
         </div>
-        <p class="goal-text">Goal: 150 minutes per week</p>
+      </section>
 
-        <div class="badges">
-          <h4>Badges</h4>
-          <ul id="badges-list">
-            <!-- Filled by script.js -->
-          </ul>
-        </div>
+      <div class="grid-2">
+        <!-- Add workout form -->
+        <section class="card">
+          <h2>Quick Add Workout</h2>
+          <form id="workout-form" class="form">
+            <div class="field">
+              <label for="date">Date</label>
+              <input type="date" id="date" required />
+            </div>
+
+            <div class="field">
+              <label for="type">Type</label>
+              <select id="type" required>
+                <option value="">Select type</option>
+                <option>Run</option>
+                <option>Walk</option>
+                <option>Yoga</option>
+                <option>Strength</option>
+                <option>Cycling</option>
+                <option>Other</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="duration">Duration (minutes)</label>
+              <input type="number" id="duration" min="1" required />
+            </div>
+
+            <div class="field">
+              <label for="notes">Notes</label>
+              <input type="text" id="notes" placeholder="Optional" />
+            </div>
+
+            <div class="form-actions">
+              <button type="submit" id="save-button">Add workout</button>
+              <button type="button" id="cancel-edit" class="secondary-button" style="display:none;">
+                Cancel edit
+              </button>
+            </div>
+          </form>
+        </section>
+
+        <!-- This week summary -->
+        <section class="card">
+          <h2>This Week</h2>
+          <p class="summary-line">
+            <span id="summary-text">0 workouts • 0 minutes</span>
+          </p>
+          <div class="progress-bar">
+            <div class="progress-fill" id="progress-fill"></div>
+          </div>
+          <p class="goal-text">
+            Weekly goal: <span id="goal-label">150</span> minutes
+          </p>
+
+          <div class="badges">
+            <h3>Badges</h3>
+            <ul id="badges-list"></ul>
+          </div>
+        </section>
       </div>
-    </div>
-  </section>
 
-  <footer>
-    <p>&copy; 2025 Yadsari Guerrero</p>
+      <!-- Recent workouts -->
+      <section class="card">
+        <div class="card-header-row">
+          <h2>Recent Workouts</h2>
+          <span class="card-subtitle" id="total-count-label">No workouts yet</span>
+        </div>
+        <ul id="recent-list" class="recent-list">
+          <!-- recent items injected by JS -->
+        </ul>
+      </section>
+    </section>
+
+    <!-- History View -->
+    <section id="view-history" class="view">
+      <section class="card">
+        <div class="card-header-row">
+          <h2>Workout History</h2>
+          <div class="filters">
+            <select id="filter-type">
+              <option value="">All types</option>
+              <option>Run</option>
+              <option>Walk</option>
+              <option>Yoga</option>
+              <option>Strength</option>
+              <option>Cycling</option>
+              <option>Other</option>
+            </select>
+            <button type="button" id="filter-reset" class="secondary-button small">
+              Reset
+            </button>
+          </div>
+        </div>
+
+        <div class="table-wrapper">
+          <table>
+            <thead>
+            <tr>
+              <th scope="col">Date</th>
+              <th scope="col">Type</th>
+              <th scope="col">Duration</th>
+              <th scope="col">Notes</th>
+              <th scope="col">Actions</th>
+            </tr>
+            </thead>
+            <tbody id="history-body">
+            <!-- rows injected by JS -->
+            </tbody>
+            <tfoot>
+            <tr>
+              <td colspan="5" id="weekly-total">Weekly Total: 0 min (0 workouts)</td>
+            </tr>
+            </tfoot>
+          </table>
+        </div>
+      </section>
+    </section>
+
+    <!-- Stats View -->
+    <section id="view-stats" class="view">
+      <section class="card">
+        <h2>Overview</h2>
+        <div class="stats-grid">
+          <div class="stat-pill">
+            <span class="stat-label">All-time workouts</span>
+            <span class="stat-value" id="stat-workouts">0</span>
+          </div>
+          <div class="stat-pill">
+            <span class="stat-label">All-time minutes</span>
+            <span class="stat-value" id="stat-minutes">0</span>
+          </div>
+          <div class="stat-pill">
+            <span class="stat-label">Average duration</span>
+            <span class="stat-value" id="stat-average">0 min</span>
+          </div>
+          <div class="stat-pill">
+            <span class="stat-label">Longest workout</span>
+            <span class="stat-value" id="stat-longest">0 min</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>By Type (This Week)</h2>
+        <ul id="stat-by-type" class="by-type-list">
+          <!-- filled by JS -->
+        </ul>
+      </section>
+    </section>
+
+    <!-- Settings View -->
+    <section id="view-settings" class="view">
+      <section class="card">
+        <h2>Settings</h2>
+        <form id="settings-form" class="form-inline">
+          <div class="field-inline">
+            <label for="goal-input">Weekly goal (minutes)</label>
+            <input type="number" id="goal-input" min="10" step="10" />
+          </div>
+          <button type="submit">Save goal</button>
+        </form>
+
+        <hr class="divider" />
+
+        <button type="button" id="clear-all" class="danger-button">
+          Clear all workouts
+        </button>
+        <p class="hint">
+          This will permanently remove all your saved workouts.
+        </p>
+
+        <p class="hint about-text">
+          DailyFit is a simple fitness tracker where you can log workouts,
+          track weekly totals, and see stats.
+        </p>
+      </section>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <span>&copy; 2025 Yadsari Guerrero · FitTrack</span>
   </footer>
-</main>
+</div>
 
 <script src="script.js"></script>
 </body>
